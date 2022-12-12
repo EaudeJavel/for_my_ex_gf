@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, unused_import
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -15,9 +15,9 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage> {
   List<String>? sentences;
+  bool _isVisible = false;
 
   @override
   void initState() {
@@ -28,10 +28,6 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => createHeartIcon(),
-          child: const Icon(Icons.favorite),
-        ),
         appBar: AppBar(
           title: Text(widget.title),
         ),
@@ -60,8 +56,38 @@ class _MyHomePageState extends State<MyHomePage>
                       // Calculate the index of the sentence to display
                       int index = DateTime.now().day % sentences!.length;
                       return Center(
-                        child: Text(sentences![index]),
-                      );
+                          child: SizedBox(
+                        width: 300,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 30),
+                              child: Visibility(
+                                visible: _isVisible,
+                                child: Text(sentences![index],
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 24,
+                                    )),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isVisible = !_isVisible;
+                                });
+                                if (kDebugMode) {
+                                  print("visible: $_isVisible");
+                                }
+                                // createText();
+                              },
+                              child: const HeartWidget(),
+                            ),
+                          ],
+                        ),
+                      ));
                     }
                   }
                 } else {
@@ -95,8 +121,6 @@ class _MyHomePageState extends State<MyHomePage>
       sentences =
           jsonData.values.map((sentence) => sentence.toString()).toList();
     }
-
-    // Return the sentences list
     return sentences;
   }
 }
