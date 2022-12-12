@@ -1,9 +1,12 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:no_more_anxiety/layouts/scaffold.dart';
 
 import 'package:no_more_anxiety/theme.dart';
 import 'package:no_more_anxiety/routes.dart';
 
 void main() async {
+  DartPluginRegistrant.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     Theme(
@@ -30,8 +33,10 @@ class ElisoAppState extends State<ElisoApp> {
     return MaterialApp(
       title: 'Eliso',
       theme: Theme.of(context),
-      home: const MyHomePage(
-        title: "Bye bye l'anxiété",
+      home: const Scaffold(
+        body: Center(
+          child: FirstLevelScaffold(),
+        ),
       ),
     );
   }

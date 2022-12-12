@@ -56,22 +56,26 @@ class _MyHomePageState extends State<MyHomePage> {
                       // Calculate the index of the sentence to display
                       int index = DateTime.now().day % sentences!.length;
                       return Center(
-                          child: SizedBox(
-                        width: 300,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
                               margin: const EdgeInsets.only(bottom: 30),
-                              child: Visibility(
-                                visible: _isVisible,
-                                child: Text(sentences![index],
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 24,
-                                    )),
-                              ),
+                              child: SizedBox(
+                                  width: 300,
+                                  height: 200,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Visibility(
+                                      visible: _isVisible,
+                                      child: Text(sentences![index],
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            fontSize: 24,
+                                          )),
+                                    ),
+                                  )),
                             ),
                             ElevatedButton(
                               onPressed: () {
@@ -83,11 +87,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                 }
                                 // createText();
                               },
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Theme.of(context).primaryColor,
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.secondary,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                ),
+                              ),
                               child: const HeartWidget(),
                             ),
                           ],
                         ),
-                      ));
+                      );
                     }
                   }
                 } else {
