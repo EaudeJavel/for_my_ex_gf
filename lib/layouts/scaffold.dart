@@ -12,9 +12,7 @@ class FirstLevelScaffoldState extends State<FirstLevelScaffold>
     with SingleTickerProviderStateMixin {
   int _currentIndex = 0;
   final List<Widget> _screen = <Widget>[
-    const MyHomePage(
-      title: "test",
-    ),
+    const MyHomePage(),
   ];
   late TabController _controller;
 
@@ -47,8 +45,8 @@ class FirstLevelScaffoldState extends State<FirstLevelScaffold>
         elevation: 10,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        selectedItemColor: ThemeData().primaryColor,
-        unselectedItemColor: ThemeData().colorScheme.secondary,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        unselectedItemColor: Theme.of(context).colorScheme.secondary,
         onTap: onTabTapped,
         currentIndex: _currentIndex,
         items: const <BottomNavigationBarItem>[

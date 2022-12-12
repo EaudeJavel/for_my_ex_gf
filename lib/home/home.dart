@@ -7,9 +7,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:no_more_anxiety/components/heart.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -29,7 +27,18 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: const Text("No more anxiety"),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.favorite),
+              onPressed: () {
+                if (kDebugMode) {
+                  print("object");
+                }
+              },
+            ),
+          ],
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
