@@ -13,6 +13,7 @@ class FirstLevelScaffoldState extends State<FirstLevelScaffold>
   int _currentIndex = 0;
   final List<Widget> _screen = <Widget>[
     const MyHomePage(),
+    const MeditationScreen(),
   ];
   late TabController _controller;
 
@@ -55,7 +56,7 @@ class FirstLevelScaffoldState extends State<FirstLevelScaffold>
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.music_note),
+            icon: Icon(Icons.bathtub_sharp),
             label: 'Music',
           ),
         ],

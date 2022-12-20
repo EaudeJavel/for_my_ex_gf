@@ -15,7 +15,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<String>? sentences;
-  bool _isVisible = false;
+  bool _isVisible = true;
 
   @override
   void initState() {
