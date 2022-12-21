@@ -7,7 +7,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:no_more_anxiety/components/heart.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({super.key, String? payload});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:no_more_anxiety/layouts/scaffold.dart';
 
 import 'package:no_more_anxiety/theme.dart';
+// ignore: unused_import
 import 'package:no_more_anxiety/routes.dart';
 
 void main() async {
