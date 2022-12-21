@@ -10,6 +10,20 @@ import 'package:no_more_anxiety/routes.dart';
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse notificationResponse) {
+  // ignore: avoid_print
+  print('notification(${notificationResponse.id}) action tapped: '
+      '${notificationResponse.actionId} with'
+      ' payload: ${notificationResponse.payload}');
+  if (notificationResponse.input?.isNotEmpty ?? false) {
+    // ignore: avoid_print
+    print(
+        'notification action tapped with input: ${notificationResponse.input}');
+  }
+}
+
+
 const AndroidInitializationSettings initializationSettingsAndroid =
     AndroidInitializationSettings('app_icon');
 const DarwinInitializationSettings initializationSettingsDarwin =
@@ -22,7 +36,7 @@ const DarwinInitializationSettings initializationSettingsDarwin =
 const InitializationSettings initializationSettings = InitializationSettings(
     android: initializationSettingsAndroid, iOS: initializationSettingsDarwin);
 
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+ void flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
 
 
@@ -49,7 +63,7 @@ const AndroidNotificationDetails androidNotificationDetails =
 const NotificationDetails notificationDetails =
     NotificationDetails(android: androidNotificationDetails);
 
-await flutterLocalNotificationsPlugin.show(
+void flutterLocalNotificationsPlugin.show(
   0,
   'Notification title',
   'Notification body',
