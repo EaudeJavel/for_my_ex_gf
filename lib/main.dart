@@ -11,6 +11,7 @@ void main() async {
   DartPluginRegistrant.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().initNotifs();
+  await NotificationService().showNotification();
   runApp(
     Theme(
       data: myAppTheme,

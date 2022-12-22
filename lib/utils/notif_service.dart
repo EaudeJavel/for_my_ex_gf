@@ -25,7 +25,6 @@ class NotificationService {
       requestSoundPermission: false,
       requestBadgePermission: false,
       requestAlertPermission: false,
-      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
     );
 
     const InitializationSettings initializationSettings =
@@ -34,15 +33,42 @@ class NotificationService {
             iOS: initializationSettingsDarwin);
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse: selectNotification);
+        onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
   }
 
-  void selectNotification(NotificationResponse details) {
-    debugPrint("selectNotification");
+  Future<void> showNotification() async {
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'Notif title',
+      'Notif body',
+      platformChannelSpecifics,
+      payload: 'item x',
+    );
+  }
+
+  void onDidReceiveNotificationResponse(
+      NotificationResponse notificationResponse) async {
+    final String? payload = notificationResponse.payload;
+    var navigatorKey = GlobalKey<NavigatorState>();
+    final BuildContext context = navigatorKey.currentContext!;
+    if (notificationResponse.payload != null) {
+      debugPrint('notification payload: $payload');
+    }
+    await Navigator.push(
+      context,
+      MaterialPageRoute<void>(builder: (context) => const MyHomePage()),
+    );
   }
 }
 
-void onDidReceiveLocalNotification(
-    int id, String? title, String? body, String? payload) {
-  debugPrint("onDidReceiveLocalNotification");
-}
+const AndroidNotificationDetails androidPlatformChannelSpecifics =
+    AndroidNotificationDetails(
+  '1',
+  'random channel',
+  importance: Importance.max,
+  priority: Priority.high,
+  ticker: 'ticker',
+);
+
+const NotificationDetails platformChannelSpecifics =
+    NotificationDetails(android: androidPlatformChannelSpecifics);
