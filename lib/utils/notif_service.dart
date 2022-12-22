@@ -1,28 +1,20 @@
-// ignore_for_file: unnecessary_null_comparison, import_of_legacy_library_into_null_safe, unused_import, unnecessary_import,, prefer_equal_for_default_values, depend_on_referenced_packages
-import 'dart:ui';
+// ignore_for_file: depend_on_referenced_packages
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:no_more_anxiety/routes.dart';
 
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
-  static final NotificationService _notificationService =
-      NotificationService._internal();
-
-  factory NotificationService() {
-    return _notificationService;
-  }
-  NotificationService._internal();
-
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  Future<void> initNotifs() async {
+  NotificationService() {
     tz.initializeTimeZones();
+  }
 
+  Future<void> initNotifs() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -41,22 +33,25 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
 
-    //Set default location to Paris
+    // Set default location to Paris
     tz.setLocalLocation(tz.getLocation('Europe/Paris'));
   }
 
-  @pragma('vm:entry-point')
   Future<void> showNotification() async {
+    final scheduledTime =
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 8));
+    const notificationDetails = NotificationDetails(
+        android: AndroidNotificationDetails('1', 'random channel',
+            importance: Importance.max,
+            priority: Priority.high,
+            ticker: 'ticker'));
+
     await flutterLocalNotificationsPlugin.zonedSchedule(
         0,
-        'scheduled title',
-        'scheduled body',
-        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 10)),
-        const NotificationDetails(
-            android: AndroidNotificationDetails('1', 'random channel',
-                importance: Importance.max,
-                priority: Priority.high,
-                ticker: 'ticker')),
+        'N\'oublie pas',
+        '1 personne t\'aime.',
+        scheduledTime,
+        notificationDetails,
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
@@ -70,15 +65,3 @@ class NotificationService {
     }
   }
 }
-
-// const AndroidNotificationDetails androidPlatformChannelSpecifics =
-//     AndroidNotificationDetails(
-//   '1',
-//   'random channel',
-//   importance: Importance.max,
-//   priority: Priority.high,
-//   ticker: 'ticker',
-// );
-
-// const NotificationDetails platformChannelSpecifics =
-//     NotificationDetails(android: androidPlatformChannelSpecifics);
