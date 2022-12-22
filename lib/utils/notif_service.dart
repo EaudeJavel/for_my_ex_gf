@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:no_more_anxiety/routes.dart';
 
-
 class NotificationService {
   static final NotificationService _notificationService =
       NotificationService._internal();
@@ -16,4 +15,34 @@ class NotificationService {
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+
+  Future<void> initNotifs() async {
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('app_icon');
+
+    const DarwinInitializationSettings initializationSettingsDarwin =
+        DarwinInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+    );
+
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+            android: initializationSettingsAndroid,
+            iOS: initializationSettingsDarwin);
+
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onDidReceiveNotificationResponse: selectNotification);
+  }
+
+  void selectNotification(NotificationResponse details) {
+    debugPrint("selectNotification");
+  }
+}
+
+void onDidReceiveLocalNotification(
+    int id, String? title, String? body, String? payload) {
+  debugPrint("onDidReceiveLocalNotification");
 }
