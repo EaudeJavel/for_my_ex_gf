@@ -17,9 +17,6 @@ jobs:
 
   steps:
   - uses: actions/checkout@v3
-  - name: Cache node modules
-    env:
-      cache-name: cache-node-modules
   - id: flutter-action
     uses: subosito/flutter-action@v2
     with:
