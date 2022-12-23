@@ -16,7 +16,15 @@ jobs:
     runs-on: ubuntu-latest
 
   steps:
-  - uses: actions/checkout@v3
+  - name: Cache node modules
+    uses: actions/checkout@v3
+    env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
   - id: flutter-action
     uses: subosito/flutter-action@v2
     with:
