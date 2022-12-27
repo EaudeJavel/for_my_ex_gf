@@ -39,19 +39,15 @@ class NotificationService {
 
   Future<void> showNotification() async {
     final scheduledTime =
-        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 8));
+        tz.TZDateTime.now(tz.local).add(const Duration(hours: 8));
     const notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails('1', 'random channel',
             importance: Importance.max,
             priority: Priority.high,
             ticker: 'ticker'));
 
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-        0,
-        'N\'oublie pas',
-        '1 personne t\'aime.',
-        scheduledTime,
-        notificationDetails,
+    await flutterLocalNotificationsPlugin.zonedSchedule(0, 'N\'oublie pas',
+        '1 personne t\'aime.', scheduledTime, notificationDetails,
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);

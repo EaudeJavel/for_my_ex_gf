@@ -13,11 +13,29 @@ class _MeditationScreen extends State<MeditationScreen> {
     super.initState();
   }
 
+  Color _circleColor = Colors.blue;
+
+  void startMeditation() {
+    setState(() {
+      _circleColor = _circleColor == Colors.blue
+          ? Colors.red
+          : Theme.of(context).primaryColor;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text("jtm"),
+        child: GestureDetector(
+          onTap: () {
+            startMeditation();
+          },
+          child: CircleAvatar(
+            radius: 80,
+            backgroundColor: _circleColor,
+          ),
+        ),
       ),
     );
   }
