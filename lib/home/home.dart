@@ -3,7 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:provider/provider.dart';
 
+import 'package:no_more_anxiety/routes.dart';
 import 'package:no_more_anxiety/components/heart.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -27,17 +29,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
+            backgroundColor:
+                Color(int.parse(context.watch<BgButtonColor>().bgButtonColor)),
             appBar: AppBar(
+              backgroundColor: Color(
+                  int.parse(context.watch<BgButtonColor>().bgButtonColor)),
               title: const Text("No more anxiety"),
               centerTitle: true,
               actions: [
                 IconButton(
                   icon: const Icon(Icons.favorite),
-                  onPressed: () {
-                    if (kDebugMode) {
-                      print("object");
-                    }
-                  },
+                  key: const Key('changeBG_floatingActionButton'),
+                  onPressed: () =>
+                      context.read<BgButtonColor>().changeBgColor(),
+                  tooltip: 'Change color',
                 ),
               ],
             ),
