@@ -1,19 +1,24 @@
+
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:no_more_anxiety/layouts/scaffold.dart';
+import 'package:provider/provider.dart';
 
-import 'package:no_more_anxiety/theme.dart';
+import 'package:no_more_anxiety/layouts/scaffold.dart';
 import 'package:no_more_anxiety/routes.dart';
+import 'package:no_more_anxiety/utils/notif_service.dart';
 
 void main() async {
   DartPluginRegistrant.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    Theme(
-      data: myAppTheme,
-      child: const ElisoApp(),
-    ),
-  );
+  await NotificationService().initNotifs();
+  await NotificationService().showNotification();
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => BgButtonColor()),
+    ],
+    child: const ElisoApp(),
+  ));
 }
 
 class ElisoApp extends StatefulWidget {
@@ -24,9 +29,9 @@ class ElisoApp extends StatefulWidget {
 }
 
 class ElisoAppState extends State<ElisoApp> {
-  bool isBusy = false;
-  bool isLoggedIn = true;
-  String errorMessage = " ";
+  // bool isBusy = false;
+  // bool isLoggedIn = true;
+  // String errorMessage = " ";
 
   @override
   Widget build(BuildContext context) {
@@ -41,3 +46,47 @@ class ElisoAppState extends State<ElisoApp> {
     );
   }
 }
+
+
+
+
+// class ElisoApp extends StatelessWidget {
+//   const ElisoApp({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       home: MyHomePage(),
+//     );
+//   }
+// }
+
+// class MyHomePage extends StatelessWidget {
+//   const MyHomePage({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor:
+//           Color(int.parse(context.watch<BgButtonColor>().bgButtonColor)),
+//       appBar: AppBar(
+//         title: const Text('Example'),
+//       ),
+//       body: Center(
+//         child: Column(
+//           mainAxisSize: MainAxisSize.min,
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: const <Widget>[
+//             Text('change color'),
+//           ],
+//         ),
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         key: const Key('changeBG_floatingActionButton'),
+//         onPressed: () => context.read<BgButtonColor>().changeBgColor(),
+//         tooltip: 'Change color',
+//         child: const Icon(Icons.add),
+//       ),
+//     );
+//   }
+// }

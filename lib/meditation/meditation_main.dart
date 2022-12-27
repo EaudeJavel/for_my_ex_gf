@@ -14,32 +14,28 @@ class _MeditationScreen extends State<MeditationScreen> {
     super.initState();
   }
 
-  void createWave() {
-    for (int i = 0; i <= CircleAvatar.radius; i++) {
-      sinWave.add(new Offset(i.toDouble(),
-      sin((time.value * 360 - i) % 360 * degrees2Radians) * 20));
-}
+  Color _circleColor = Colors.blue;
+
+  void startMeditation() {
+    setState(() {
+      _circleColor = _circleColor == Colors.blue
+          ? Colors.red
+          : Theme.of(context).primaryColor;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Mon espace méditation"),
-        centerTitle: true,
-      ),
       body: Center(
         child: GestureDetector(
-          child: const CircleAvatar(
-            radius: 100,
-            backgroundColor: Colors.pink,
-            child: Text("Méditer"),
-          ),
           onTap: () {
-            if (kDebugMode) {
-              print("object");
-            }
+            startMeditation();
           },
+          child: CircleAvatar(
+            radius: 80,
+            backgroundColor: _circleColor,
+          ),
         ),
       ),
     );
