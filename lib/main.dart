@@ -1,9 +1,8 @@
-
-
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:no_more_anxiety/theme.dart';
 import 'package:no_more_anxiety/layouts/scaffold.dart';
 import 'package:no_more_anxiety/routes.dart';
 import 'package:no_more_anxiety/utils/notif_service.dart';
@@ -13,12 +12,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().initNotifs();
   await NotificationService().showNotification();
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => BgButtonColor()),
-    ],
-    child: const ElisoApp(),
-  ));
+  runApp(
+    Theme(
+      data: myAppTheme,
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => OnDarkMode()),
+        ],
+        child: const ElisoApp(),
+      ),
+    ),
+  );
 }
 
 class ElisoApp extends StatefulWidget {
@@ -29,10 +33,6 @@ class ElisoApp extends StatefulWidget {
 }
 
 class ElisoAppState extends State<ElisoApp> {
-  // bool isBusy = false;
-  // bool isLoggedIn = true;
-  // String errorMessage = " ";
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -1,15 +1,23 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:no_more_anxiety/theme.dart';
 
 /// Mix-in [DiagnosticableTreeMixin] to have access to [debugFillProperties] for the devtool
-class BgButtonColor with ChangeNotifier, DiagnosticableTreeMixin {
-  String _bgButtonColor = "0xFFFFFFFF";
-  String get bgButtonColor => _bgButtonColor;
+class OnDarkMode with ChangeNotifier, DiagnosticableTreeMixin {
+  bool _onDarkMode = false;
+  Color get bgDarkmode => _onDarkMode
+      ? myAppTheme.primaryColorDark
+      : myAppTheme.colorScheme.primary;
+
+  Color get textDarkmode => _onDarkMode
+      ? myAppTheme.colorScheme.primary
+      : myAppTheme.primaryColorDark;
 
   void changeBgColor() {
-    if (_bgButtonColor == "0xFFFFFFFF") {
-      _bgButtonColor = "0xFF000000";
-    } else {
-      _bgButtonColor = "0xFFFFFFFF";
+    _onDarkMode = !_onDarkMode;
+    if (kDebugMode) {
+      print('Darkmode: $_onDarkMode');
+      print('bgColor: ${bgDarkmode.toString()}');
     }
     notifyListeners();
   }
@@ -18,6 +26,6 @@ class BgButtonColor with ChangeNotifier, DiagnosticableTreeMixin {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(StringProperty('bgColor', bgButtonColor));
+    properties.add(StringProperty('darkmode', _onDarkMode.toString()));
   }
 }

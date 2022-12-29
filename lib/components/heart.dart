@@ -14,13 +14,3 @@ class HeartWidget extends StatelessWidget {
     );
   }
 }
-
-//create a function that create a heart icon in the middle of the screen
-void createHeartIcon() {
-  const Center(
-    child: HeartWidget(),
-  );
-  if (kDebugMode) {
-    print("Heart icon created");
-  }
-}

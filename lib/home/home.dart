@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:no_more_anxiety/theme.dart';
 import 'package:provider/provider.dart';
 
 import 'package:no_more_anxiety/routes.dart';
@@ -29,19 +30,21 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            backgroundColor:
-                Color(int.parse(context.watch<BgButtonColor>().bgButtonColor)),
+            backgroundColor: context.watch<OnDarkMode>().bgDarkmode,
             appBar: AppBar(
-              backgroundColor: Color(
-                  int.parse(context.watch<BgButtonColor>().bgButtonColor)),
-              title: const Text("No more anxiety"),
+              backgroundColor: context.watch<OnDarkMode>().bgDarkmode,
+              title: const Text(
+                "No more anxiety",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
               centerTitle: true,
               actions: [
                 IconButton(
                   icon: const Icon(Icons.favorite),
                   key: const Key('changeBG_floatingActionButton'),
-                  onPressed: () =>
-                      context.read<BgButtonColor>().changeBgColor(),
+                  onPressed: () => context.read<OnDarkMode>().changeBgColor(),
                   tooltip: 'Change color',
                 ),
               ],
@@ -103,10 +106,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                     // createText();
                                   },
                                   style: ElevatedButton.styleFrom(
+                                    //here
                                     foregroundColor:
-                                        Theme.of(context).primaryColor,
+                                        myAppTheme.colorScheme.onPrimary,
                                     backgroundColor:
-                                        Theme.of(context).colorScheme.secondary,
+                                        myAppTheme.colorScheme.tertiary,
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(10),

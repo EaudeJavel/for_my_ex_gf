@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:no_more_anxiety/routes.dart';
+import 'package:provider/provider.dart';
 
 class FirstLevelScaffold extends StatefulWidget {
   const FirstLevelScaffold({super.key});
@@ -42,7 +43,7 @@ class FirstLevelScaffoldState extends State<FirstLevelScaffold>
       appBar: null,
       body: TabBarView(controller: _controller, children: _screen),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: context.watch<OnDarkMode>().bgDarkmode,
         elevation: 10,
         showSelectedLabels: false,
         showUnselectedLabels: false,
