@@ -20,6 +20,10 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String>? sentences;
   bool _isVisible = true;
 
+  Color tdm(OnDarkMode onDarkMode) {
+    return onDarkMode.textDarkmode;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -33,10 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: context.watch<OnDarkMode>().bgDarkmode,
             appBar: AppBar(
               backgroundColor: context.watch<OnDarkMode>().bgDarkmode,
-              title: const Text(
+              title: Text(
                 "No more anxiety",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: tdm(context.watch<OnDarkMode>()),
                 ),
               ),
               centerTitle: true,
@@ -46,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   key: const Key('changeBG_floatingActionButton'),
                   onPressed: () => context.read<OnDarkMode>().changeBgColor(),
                   tooltip: 'Change color',
+                  color: tdm(context.watch<OnDarkMode>()),
                 ),
               ],
             ),
@@ -87,11 +92,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                         alignment: Alignment.center,
                                         child: Visibility(
                                           visible: _isVisible,
-                                          child: Text(sentences![index],
-                                              textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                fontSize: 24,
-                                              )),
+                                          child: Text(
+                                            sentences![index],
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: tdm(
+                                                  context.watch<OnDarkMode>()),
+                                              fontSize: 20,
+                                            ),
+                                          ),
                                         ),
                                       )),
                                 ),

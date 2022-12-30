@@ -5,9 +5,10 @@ final ThemeData myAppTheme = ThemeData(
   primaryColor: const Color.fromARGB(255, 173, 168, 230),
   primaryColorDark: const Color.fromARGB(255, 68, 66, 91),
   colorScheme: const ColorScheme.light(
-      primary: Color.fromARGB(255, 251, 245, 228),
-      secondary: Color.fromARGB(255, 233, 207, 192),
-      tertiary: Color.fromARGB(255, 174, 124, 115)),
+    primary: Color.fromARGB(255, 251, 245, 228),
+    secondary: Color.fromARGB(255, 233, 207, 192),
+    tertiary: Color.fromARGB(255, 174, 124, 115),
+  ),
   textTheme: const TextTheme(
     headline1: TextStyle(
       fontSize: 32,

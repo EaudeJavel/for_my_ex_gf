@@ -12,6 +12,7 @@ class FirstLevelScaffold extends StatefulWidget {
 class FirstLevelScaffoldState extends State<FirstLevelScaffold>
     with SingleTickerProviderStateMixin {
   int _currentIndex = 0;
+
   final List<Widget> _screen = <Widget>[
     const MyHomePage(),
     const MeditationScreen(),
@@ -47,8 +48,9 @@ class FirstLevelScaffoldState extends State<FirstLevelScaffold>
         elevation: 10,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Theme.of(context).colorScheme.secondary,
+        //todo color degrade
+        selectedItemColor: context.watch<OnDarkMode>().textDarkmode,
+        unselectedItemColor: context.watch<OnDarkMode>().textDarkmode,
         onTap: onTabTapped,
         currentIndex: _currentIndex,
         items: const <BottomNavigationBarItem>[
