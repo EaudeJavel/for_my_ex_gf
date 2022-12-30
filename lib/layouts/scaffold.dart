@@ -48,7 +48,6 @@ class FirstLevelScaffoldState extends State<FirstLevelScaffold>
         elevation: 10,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        //todo color degrade
         selectedItemColor: context.watch<OnDarkMode>().appbarSelectedDarkmode,
         unselectedItemColor: context.watch<OnDarkMode>().textDarkmode,
         onTap: onTabTapped,

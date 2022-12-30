@@ -117,9 +117,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                   style: ElevatedButton.styleFrom(
                                     //here
                                     foregroundColor:
-                                        myAppTheme.colorScheme.onPrimary,
+                                        context.watch<OnDarkMode>().bgDarkmode,
                                     backgroundColor:
-                                        myAppTheme.colorScheme.tertiary,
+                                        tdm(context.watch<OnDarkMode>()),
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(10),
