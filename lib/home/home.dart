@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison, unused_import
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:no_more_anxiety/theme.dart';
@@ -18,7 +19,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<String>? sentences;
-  bool _isVisible = true;
+  bool _isVisible = false;
 
   Color tdm(OnDarkMode onDarkMode) {
     return onDarkMode.textDarkmode;
@@ -87,7 +88,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                   margin: const EdgeInsets.only(bottom: 30),
                                   child: SizedBox(
                                       width: 300,
-                                      height: 200,
                                       child: Align(
                                         alignment: Alignment.center,
                                         child: Visibility(
