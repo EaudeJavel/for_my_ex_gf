@@ -14,7 +14,7 @@ class OnDarkMode with ChangeNotifier, DiagnosticableTreeMixin {
       : myAppTheme.primaryColorDark;
 
   Color get appbarSelectedDarkmode =>
-      _onDarkMode ? myAppTheme.primaryColor : myAppTheme.colorScheme.tertiary;
+      _onDarkMode ? myAppTheme.colorScheme.tertiary : myAppTheme.primaryColor;
 
   void changeBgColor() {
     _onDarkMode = !_onDarkMode;
