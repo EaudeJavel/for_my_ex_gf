@@ -87,9 +87,18 @@ class _MeditationScreen extends State<MeditationScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Time'),
+                Text(
+                  'Time',
+                  style: TextStyle(
+                    color: tdm(context.watch<OnDarkMode>()),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(width: 20),
-                DropdownInline(items: minutes, onChanged: changeTime)
+                DropdownInline(
+                    items: minutes,
+                    onChanged: changeTime,
+                    )
               ],
             ),
           ],

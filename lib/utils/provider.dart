@@ -5,6 +5,8 @@ import 'package:no_more_anxiety/theme.dart';
 /// Mix-in [DiagnosticableTreeMixin] to have access to [debugFillProperties] for the devtool
 class OnDarkMode with ChangeNotifier, DiagnosticableTreeMixin {
   bool _onDarkMode = false;
+  bool get onDarkMode => _onDarkMode;
+
   Color get bgDarkmode => _onDarkMode
       ? myAppTheme.primaryColorDark
       : myAppTheme.colorScheme.primary;
