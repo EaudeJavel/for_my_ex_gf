@@ -14,14 +14,12 @@ class MeditationScreen extends StatefulWidget {
 
 class _MeditationScreen extends State<MeditationScreen> {
   Color _circleColor = Colors.red;
-
+  late String selectedMinute;
   List<String> get minutes => [
         "1",
         "2",
         "3",
       ];
-
-  final String _selectedMinute = "0";
 
   Color tdm(OnDarkMode onDarkMode) {
     return onDarkMode.textDarkmode;
@@ -32,19 +30,18 @@ class _MeditationScreen extends State<MeditationScreen> {
     super.initState();
   }
 
-  String changeTime(item) {
-    item = _selectedMinute;
-    return _selectedMinute;
+  void changeTime(String item) {
+    selectedMinute = item;
   }
 
   void startMeditation(int time) {
     if (kDebugMode) {
-      print(_selectedMinute);
+      print(selectedMinute);
     }
     setState(() {
       _circleColor = Colors.green;
     });
-    Future.delayed(Duration(minutes: time), () {
+    Future.delayed(Duration(seconds: time), () {
       setState(() {
         _circleColor = Colors.red;
       });
@@ -72,7 +69,7 @@ class _MeditationScreen extends State<MeditationScreen> {
           children: [
             GestureDetector(
               onTap: () => {
-                startMeditation(int.parse(_selectedMinute)),
+                startMeditation(int.parse(selectedMinute)),
               },
               child: Container(
                 width: 200,
@@ -96,9 +93,9 @@ class _MeditationScreen extends State<MeditationScreen> {
                 ),
                 const SizedBox(width: 20),
                 DropdownInline(
-                    items: minutes,
-                    onChanged: changeTime,
-                    )
+                  items: minutes,
+                  onChanged: changeTime,
+                )
               ],
             ),
           ],
