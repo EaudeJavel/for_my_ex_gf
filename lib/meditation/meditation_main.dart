@@ -14,15 +14,13 @@ class MeditationScreen extends StatefulWidget {
 
 class _MeditationScreen extends State<MeditationScreen> {
   Color _circleColor = Colors.red;
-
+  late String selectedMinute;
   List<String> get minutes => [
         "5",
         "10",
         "15",
         "20",
       ];
-
-  final String _selectedMinute = "0";
 
   Color tdm(OnDarkMode onDarkMode) {
     return onDarkMode.textDarkmode;
@@ -33,19 +31,18 @@ class _MeditationScreen extends State<MeditationScreen> {
     super.initState();
   }
 
-  String changeTime(item) {
-    item = _selectedMinute;
-    return _selectedMinute;
+  void changeTime(String item) {
+    selectedMinute = item;
   }
 
   void startMeditation(int time) {
     if (kDebugMode) {
-      print(_selectedMinute);
+      print(selectedMinute);
     }
     setState(() {
       _circleColor = Colors.green;
     });
-    Future.delayed(Duration(minutes: time), () {
+    Future.delayed(Duration(seconds: time), () {
       setState(() {
         _circleColor = Colors.red;
       });
@@ -73,7 +70,7 @@ class _MeditationScreen extends State<MeditationScreen> {
           children: [
             GestureDetector(
               onTap: () => {
-                startMeditation(int.parse(_selectedMinute)),
+                startMeditation(int.parse(selectedMinute)),
               },
               child: Container(
                 width: 200,
@@ -88,9 +85,18 @@ class _MeditationScreen extends State<MeditationScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Time'),
+                Text(
+                  'Time',
+                  style: TextStyle(
+                    color: tdm(context.watch<OnDarkMode>()),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(width: 20),
-                DropdownInline(items: minutes, onChanged: changeTime)
+                DropdownInline(
+                  items: minutes,
+                  onChanged: changeTime,
+                )
               ],
             ),
           ],

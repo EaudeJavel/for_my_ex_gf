@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show SystemUiOverlayStyle, rootBundle;
 import 'package:no_more_anxiety/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -38,6 +38,13 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: context.watch<OnDarkMode>().bgDarkmode,
             appBar: AppBar(
               backgroundColor: context.watch<OnDarkMode>().bgDarkmode,
+              systemOverlayStyle: SystemUiOverlayStyle(
+                systemNavigationBarColor: Colors.transparent,
+                systemNavigationBarIconBrightness: Brightness.dark,
+                statusBarColor: context.watch<OnDarkMode>().bgDarkmode,
+                statusBarBrightness: Brightness.dark,
+                statusBarIconBrightness: Brightness.dark,
+              ),
               title: Text(
                 "No more anxiety",
                 style: TextStyle(
