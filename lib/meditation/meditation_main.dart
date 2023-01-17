@@ -16,9 +16,10 @@ class _MeditationScreen extends State<MeditationScreen> {
   Color _circleColor = Colors.red;
 
   List<String> get minutes => [
-        "1",
-        "2",
-        "3",
+        "5",
+        "10",
+        "15",
+        "20",
       ];
 
   final String _selectedMinute = "0";
